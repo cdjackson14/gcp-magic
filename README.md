@@ -7,6 +7,7 @@ I developed this were the firewall rules are very tight, but I occassionally nee
 
 ## Usage:
 ```magic list | open <port_number> | close <port_number>```
+
 This will create a firewall rule that starts with cdj-tmp- and adds the port number.
 
 ## Examples
