@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Check to see if the first option is either open or close, then a port number
+# ie: magic open 3389
+#     magic close 3389
+#     magic list
+#
+
+# Init
+myPrefix=cdj-tmp
+
+case $1 in
+    list)
+	gcloud compute firewall-rules list
+	;;
+    open)
+	if [ $# -eq 2 ] && [ $2 -ge 0 ] && [ $2 -le 65535 ]; then
+		gcloud compute \
+		   firewall-rules create $myPrefix-$2 \
+		   --direction=INGRESS \
+		   --priority=1000 \
+		   --network=default \
+		   --action=ALLOW \
+		   --rules=tcp:$2 \
+		   --source-ranges=0.0.0.0/0
+	else
+		myErr=1
+	fi
+	;;
+    close)
+	if [ $# -eq 2 ] && [ $2 -ge 0 ] && [ $2 -le 65535 ]; then
+		gcloud compute -q firewall-rules delete $myPrefix-$2 \
+
+	else
+		myErr=1
+	fi
+	;;
+    *)
+	myErr=1
+	;;
+esac
+
+
+if [ $myErr ]; then
+	echo 'Usage: magic <list|open|close> [port number]'
+	echo '  magic list'
+	echo '  magic open 3389'
+	echo '  magic close 3389'
+fi
+
