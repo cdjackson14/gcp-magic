@@ -42,9 +42,11 @@ esac
 
 
 if [ $myErr ]; then
-	echo 'Usage: magic <list|open|close> [port number]'
-	echo '  magic list'
-	echo '  magic open 3389'
-	echo '  magic close 3389'
+	echo 'Usage: magic list | open <port_number> | close <port_number>'
+	echo '  $ magic open 3389    # opens up port 3389 for RDP'
+	echo '  $ magic open 22      # opens up port 22 for SSH'
+	echo '  $ magic close 3389   # close (remove) port 3389'
+	echo '  $ magic close 22     # close (remove)  port 3389'
+	echo '  $ magic list         # list out the current'
 fi
 
