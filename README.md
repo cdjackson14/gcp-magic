@@ -10,6 +10,14 @@ I developed this were the firewall rules are very tight, but I occassionally nee
 
 This will create a firewall rule that starts with cdj-tmp- and adds the port number.
 
+```
+$ magic open 22
+Creating firewall...⠶Created [./project/global/firewalls/cdj-tmp-22].
+Creating firewall...done.
+NAME        NETWORK  DIRECTION  PRIORITY  ALLOW   DENY  DISABLED
+cdj-tmp-22  default  INGRESS    1000      tcp:22        False
+```
+
 ## Examples
 ```
 $ magic open 3389    # opens up port 3389 for RDP
