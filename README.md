@@ -6,7 +6,7 @@ This is a simple bash script to allow a person to add and remove a firewall rule
 I developed this were the firewall rules are very tight, but I occassionally needed to open a port for a few minutes, and then shut it back down.
 
 ## Git Download
-Just like any other GIT...
+Just like any other Git...
 ```git clone https://github.com/cdjackson14/gcp-magic```
 
 ## Usage:
