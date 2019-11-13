@@ -8,23 +8,21 @@
 
 # Init
 myPrefix=cdj-tmp
+myBlah='Executing: '
 
 # Hey, let's check to see what options were given
 case $1 in
     list)
-	gcloud compute firewall-rules list
+	myCmd='gcloud compute firewall-rules list'
+	echo ${myBlah}${myCmd}
+	eval $myCmd
 	;;
     open)
     	# Check to make sure the port number is between 0-65535, and is a number, not a string
 	if [ $# -eq 2 ] && [ $2 -ge 0 ] && [ $2 -le 65535 ]; then
-		gcloud compute \
-		   firewall-rules create $myPrefix-$2 \
-		   --direction=INGRESS \
-		   --priority=1000 \
-		   --network=default \
-		   --action=ALLOW \
-		   --rules=tcp:$2 \
-		   --source-ranges=0.0.0.0/0
+		myCmd='gcloud compute firewall-rules create '${myPrefix}'-'${2}' --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:'${2}' --source-ranges=0.0.0.0/0'
+		echo ${myBlah}${myCmd}
+		eval $myCmd
 	else
 		myErr=1
 	fi
@@ -32,8 +30,9 @@ case $1 in
     close)
     	# Check to make sure the port number is between 0-65535, and is a number, not a string
 	if [ $# -eq 2 ] && [ $2 -ge 0 ] && [ $2 -le 65535 ]; then
-		gcloud compute -q firewall-rules delete $myPrefix-$2 \
-
+		myCmd='gcloud compute -q firewall-rules delete '${myPrefix}'-'${2}
+		echo ${myBlah}${myCmd}
+		eval $myCmd
 	else
 		myErr=1
 	fi
